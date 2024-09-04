@@ -1,4 +1,4 @@
-# Order Production and Purchase Management System of CSR Ads and Holdings Pvt Ltd
+# CRM And SCM System of CSR Ads and Holdings Pvt Ltd
 
 This is a web application built using Spring Boot for the backend and HTML, CSS, JavaScript, and Bootstrap for the frontend. The application is designed to run on a Tomcat server and uses MySQL as its database.
 
