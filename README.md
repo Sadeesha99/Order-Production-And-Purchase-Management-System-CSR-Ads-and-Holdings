@@ -1,11 +1,9 @@
-# Project Title
+# Order Production and Purchase Management System of CSR Ads and Holdings Pvt Ltd
 
-A brief description of what your project does.
+This is a web application built using Spring Boot for the backend and HTML, CSS, JavaScript, and Bootstrap for the frontend. The application is designed to run on a Tomcat server and uses MySQL as its database.
 
 ## Table of Contents
 
-- [Project Title](#project-title)
-- [Table of Contents](#table-of-contents)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Prerequisites](#prerequisites)
@@ -19,42 +17,47 @@ A brief description of what your project does.
 
 ## Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- User authentication and authorization
+- CRUD operations for managing entities
+- Responsive design with Bootstrap
+- RESTful API endpoints
 
 ## Technologies Used
 
 ### Backend
 
-- Java
-- Spring Boot
-- JPA Repository
-- MySQL
+- **Java 17+**
+- **Spring Boot**: Microservices framework
+- **JPA Repository**: Data persistence
+- **MySQL**: Relational database
 
 ### Frontend
 
-- HTML
-- CSS
-- JavaScript
-- Bootstrap
+- **HTML5**: Markup language
+- **CSS3**: Styling
+- **JavaScript**: Interactivity
+- **Bootstrap 5**: Responsive design framework
 
 ### Build Tool
 
-- Gradle
+- **Gradle**: Dependency management and build tool
 
 ### Server
 
-- Apache Tomcat
+- **Apache Tomcat 9+**: Application server
 
 ## Prerequisites
 
-- Java 17+
-- MySQL 8+
-- Gradle 7+
-- Apache Tomcat 9+
+Before you begin, ensure you have met the following requirements:
+
+- **Java 17+**: Ensure Java Development Kit (JDK) is installed.
+- **MySQL 8+**: MySQL server should be running.
+- **Gradle 7+**: Install Gradle for building the project.
+- **Apache Tomcat 9+**: Tomcat server for deploying the application.
 
 ## Installation
+
+To set up the project locally, follow these steps:
 
 1. **Clone the repository**
    ```bash
