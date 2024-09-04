@@ -11,7 +11,6 @@ This is a web application built using Spring Boot for the backend and HTML, CSS,
 - [Configuration](#configuration)
 - [Running the Application](#running-the-application)
 - [Usage](#usage)
-- [Database Configuration](#database-configuration)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -157,4 +156,16 @@ After setting up your environment and dependencies, you'll need to configure the
 ---
 
 This configuration should prepare your project to be deployed on a Tomcat server with MySQL as the backend. Ensure to replace placeholders with actual values specific to your environment.
+
+
+## Usage
+
+After the application is up and running, you can:
+
+Register a new user: Access the registration page.
+Log in: Use the login page to access protected resources.
+Perform CRUD operations: Use the provided UI to create, read, update, and delete records.
+
+## Contributing
+Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
