@@ -63,3 +63,98 @@ To set up the project locally, follow these steps:
    ```bash
    git clone https://github.com/yourusername/your-repo-name.git
    cd your-repo-name
+   ```
+
+
+## Configuration
+
+After setting up your environment and dependencies, you'll need to configure the application to connect to your MySQL database and specify the server settings.
+
+### MySQL Configuration
+
+1. **Create a MySQL Database**
+   - Open your MySQL command line or a MySQL client (like phpMyAdmin).
+   - Create a new database by running:
+     ```sql
+     CREATE DATABASE csroverall;
+     ```
+   - Replace `csroverall` with the desired name of your database.
+
+2. **Update `application.properties`**
+   - Navigate to `src/main/resources/application.properties`.
+   - Update the following properties with your MySQL database details:
+
+     ```properties
+     spring.datasource.url=jdbc:mysql://localhost:3306/yourdbname
+
+     # Database credentials
+     spring.datasource.username=yourusername
+     spring.datasource.password=yourpassword
+
+     # JPA configuration
+     spring.jpa.hibernate.ddl-auto=update
+     spring.jpa.show-sql=true
+     spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+     ```
+
+   - Replace `yourusername` and `yourpassword` with your actual MySQL username and password.
+
+3. **Test Database Connection**
+   - Ensure that the application can connect to the database by running the application using Gradle:
+     ```bash
+     gradle bootRun
+     ```
+   - The application should start without errors, and the tables should be created automatically in your MySQL database.
+
+### Server Configuration
+
+1. **Tomcat Server**
+   - By default, the application runs on port `8080` when deployed on Tomcat.
+   - You can change the default port by updating the `server.port` property in `application.properties`:
+
+     ```properties
+     server.port=8080
+     ```
+
+   - If you're deploying multiple applications on the same Tomcat instance, ensure each application has a unique context path. Set the context path in `application.properties`:
+
+     ```properties
+     server.servlet.context-path=/com.csr
+     ```
+
+2. **Logging Configuration**
+   - You can customize the logging level and output format by modifying the following properties in `application.properties`:
+
+     ```properties
+     logging.level.org.springframework=INFO
+     logging.level.com.yourpackage=DEBUG
+     logging.file.name=logs/spring-boot-app.log
+     ```
+
+   - This will create a log file named `spring-boot-app.log` in the `logs` directory of your project.
+
+### Additional Configuration Options
+
+- **Session Timeout**
+  - Configure session timeout (in seconds) in `application.properties`:
+
+    ```properties
+    server.servlet.session.timeout=1800
+    ```
+
+- **Security Settings**
+  - For basic security configurations, such as enabling HTTPS, you can update the properties file or implement a custom security configuration in your Spring Boot application.
+
+    ```properties
+    server.ssl.key-store=classpath:keystore.p12
+    server.ssl.key-store-password=yourpassword
+    server.ssl.keyStoreType=PKCS12
+    server.ssl.keyAlias=tomcat
+    ```
+
+  - Replace `yourpassword` with your keystore password.
+
+---
+
+This configuration should prepare your project to be deployed on a Tomcat server with MySQL as the backend. Ensure to replace placeholders with actual values specific to your environment.
+
