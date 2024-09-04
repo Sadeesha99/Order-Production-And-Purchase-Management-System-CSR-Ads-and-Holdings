@@ -58,8 +58,8 @@ To set up the project locally, follow these steps:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/Sadeesha99/Order-Production-And-Purchase-Management-System-CSR-Ads-and-Holdings.git
+   cd Order-Production-And-Purchase-Management-System-CSR-Ads-and-Holdings
    ```
 
 
@@ -85,8 +85,8 @@ After setting up your environment and dependencies, you'll need to configure the
      spring.datasource.url=jdbc:mysql://localhost:3306/yourdbname
 
      # Database credentials
-     spring.datasource.username=yourusername
-     spring.datasource.password=yourpassword
+     spring.datasource.username = dbusername
+     spring.datasource.password = dbpassword
 
      # JPA configuration
      spring.jpa.hibernate.ddl-auto=update
@@ -94,7 +94,7 @@ After setting up your environment and dependencies, you'll need to configure the
      spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
      ```
 
-   - Replace `yourusername` and `yourpassword` with your actual MySQL username and password.
+   - Replace `dbusername` and `dbpassword` with your actual MySQL username and password.
 
 3. **Test Database Connection**
    - Ensure that the application can connect to the database by running the application using Gradle:
