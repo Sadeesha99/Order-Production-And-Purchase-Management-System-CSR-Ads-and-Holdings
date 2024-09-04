@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="/fontawesome-6.4.2/css/all.css">
+  <link rel="stylesheet" href="/css/error.css">
+  <title>Error Page</title>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="lock"></div>
+<div class="message">
+  <h1>Access to this part is restricted</h1>
+  <p>Please check with the system admin if you believe this is a mistake.</p>
+  <div class="container">
+    <div class="center">
+      <button id="backToDashBtn" style="cursor: pointer;" onclick="window.location.replace('/dashboard');">
+        Go Back to Home
+      </button>
+    </div>
+  </div>
+  <div class="containerLogOut">
+    <div class="centerLogOut">
+      <button id="logoutBtn" style="cursor: pointer;" onclick="window.location.replace('/logout');">
+        <span style="margin-left: 2px;"><i class="fas fa-power-off"></i></span>
+        Log Out
+      </button>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  
+</body>
+</html>

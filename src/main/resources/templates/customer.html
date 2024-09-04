@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragementHead:: headTagFragment}"></head>
+<head>
+    <!-- Module CSS -->
+    <link rel="stylesheet" href="/css/customer.css">
+</head>
+
+<body class="sb-nav-fixed">
+
+<nav th:replace="~{fragementNavBars :: topNavFragment}"></nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{fragementNavBars :: sideNavFragment}"></nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main style="margin-top: 22px">
+            <div class="container-fluid px-4">
+                <div class="tab">
+                    <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="tableTabButton" data-bs-toggle="tab"
+                                    data-bs-target="#table-tab-pane" type="button" role="tab" aria-controls="table-tab-pane"
+                                    aria-selected="true">Table</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="formTabButton" data-bs-toggle="tab" data-bs-target="#form-tab-pane"
+                                    type="button" role="tab" aria-controls="form-tab-pane" aria-selected="false">Form</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="table-tab-pane" role="tabpanel" aria-labelledby="table-tab"
+                         tabindex="0">
+                        <!-- Table Area Start -->
+                        <div class="row mt-2">
+                            <div class="row-cols-md-1"></div>
+                            <div class="row-cols-md-10 table-responsive" style="width: 100%;">
+                                <!-- Table Start -->
+                                <div class="tableDiv">
+                                    <table class="table table-hover" id="tableCustomer">
+                                        <thead class="table-active">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Cust No.</th>
+                                            <th>Name</th>
+                                            <th>Status</th>
+                                            <th>Mobile</th>
+                                            <th>Customer Type</th>
+                                            <th>Modify</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tableBodyCustomer">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Table End -->
+                            </div>
+                            <div class="row-cols-md-1"></div>
+                        </div>
+                        <!-- Table Area End -->
+                    </div>
+                    <div class="tab-pane fade" id="form-tab-pane" role="tabpanel" aria-labelledby="form-tab" tabindex="1">
+                        <!-- Form Start -->
+                        <div class="row mt-2">
+                            <div class="row-cols-md-1"></div>
+                            <!-- Table Start -->
+                            <div class="row-cols-md-10">
+                                <form onsubmit="return false" id="formCustomer">
+                                    <!-- form onsubmit return is used to stop auto submission and then to force a manual submission -->
+
+                                    <!-- back button section-->
+                                    <!-- back button section-->
+
+                                    <!-- Auto Generated Customer No -->
+                                    <div class="row mt-1 ">
+                                        <div class="d-flex justify-content-start">
+                                            <div class="div col-6">
+                                                <!-- Customer No -->
+                                                <div class="row d-flex">
+                                                    <div class="col-4">
+                                                        <label for="inputCustomerNo" class="form-label fw-bold">
+                                                            Customer No. : <span class="text-danger">*</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Auto Generated UserID" id="inputCustomerNo" required
+                                                               disabled>
+                                                    </div>
+                                                </div>
+                                                <!-- Customer No End-->
+                                            </div>
+                                            <div class="col-4"></div>
+                                            <!-- Required Label-->
+                                            <div class="col-1">
+                                                <span class="required"><span class="text-danger">*</span>Required</span>
+                                            </div>
+                                            <!-- back button section-->
+                                            <div class="col-1">
+                                                <button type="button" style="width: 100px;" class="btn text-primary btn-lg"
+                                                        onclick="backButtonCustomerForm()"><i
+                                                        class="fa-solid fa-delete-left fa-xl"></i></button>
+                                            </div>
+                                            <!-- back button section-->
+                                            <!-- Required Label End-->
+                                        </div>
+                                    </div>
+                                    <!-- Auto Generated Customer No End-->
+
+                                    <div id="formEditableArea">
+                                        <!-- Customer Name And Mobile -->
+                                        <div class="row mt-1 gy-2">
+                                            <div class="d-flex justify-content-between">
+                                                <!-- Customer Name -->
+                                                <div class="col-6">
+                                                    <div class="row d-flex justify-content-start">
+                                                        <div class="col-4">
+                                                            <label for="inputCustomerName" class="form-label fw-bold">
+                                                                Customer Name : <span class="text-danger">*</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Customer Name" id="inputCustomerName"
+                                                                   onkeyup="textValidator(this,'^([A-Za-z\\s\\.]{2,20})+$','customer', 'name')">
+                                                            <div class="valid-feedback"></div>
+                                                            <div class="invalid-feedback">Please Enter a valid name..!</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Customer Name Ends-->
+                                                <!-- Customer Mobile -->
+                                                <div class="col-6">
+                                                    <div class="row d-flex justify-content-start">
+                                                        <div class="col-4">
+                                                            <label for="inputCustomerMobile" class="form-label fw-bold">
+                                                                Customer Mobile : <span class="text-danger">*</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Customer Mobile" id="inputCustomerMobile"
+                                                                   onkeyup="textValidator(this,'^[0][7][01245678][0-9]{7}$','customer','mobile')">
+                                                            <div class="valid-feedback"></div>
+                                                            <div class="invalid-feedback">Please Enter a Valid Mobile no.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Customer Mobile-->
+                                            </div>
+                                        </div>
+                                        <!-- Customer Name And Mobile End -->
+
+                                        <!-- Customer Email And Secondary Contact No. -->
+                                        <div class="row mt-1 gy-2">
+                                            <div class="d-flex justify-content-between">
+                                                <!-- Customer Email -->
+                                                <div class="col-6">
+                                                    <div class="row d-flex justify-content-start">
+                                                        <div class="col-4">
+                                                            <label for="inputCustomerEmail" class="form-label fw-bold">
+                                                                Email :
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Customer Email" id="inputCustomerEmail"
+                                                                   onkeyup="textValidator(this,'^[A-Za-z0-9\\-\\_\\.]{4,30}[@][a-z]{2,10}([.][a-z]{2,10})+$','customer','email')">
+                                                            <div class="valid-feedback"></div>
+                                                            <div class="invalid-feedback">Please Enter a Valid Email Address.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Customer Email End-->
+                                                <!-- Secondary Contact No. -->
+                                                <div class="col-6">
+                                                    <div class="row d-flex justify-content-start">
+                                                        <div class="col-4">
+                                                            <label for="inputSecondaryContact" class="form-label fw-bold">
+                                                                Secondary Contact No :
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <div class="col-11 justify-content-start">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Enter Secondary Contact" id="inputSecondaryContact"
+                                                                       onkeyup="textValidator(this,'^[0][12345678][01245678][0-9]{7}$','customer','secondarycontactno')">
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Please Enter a Valid Telephone No.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Secondary Contact No. End-->
+                                            </div>
+                                        </div>
+                                        <!-- Customer Email And Secondary Contact No. End -->
+                                        <!-- Customer Type And Customer Status -->
+                                        <div class="row mt-1 gy-2">
+                                            <div class="d-flex justify-content-between">
+                                                <!-- Customer Type -->
+                                                <div class="col-6">
+                                                    <div class="row d-flex justify-content-start">
+                                                        <div class="col-4">
+                                                            <label for="inputCustomerType" class="form-label fw-bold">
+                                                                Customer Type :
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <select type="select" class="form-control"
+                                                                    id="inputCustomerType"
+                                                                    onchange="selectStaticValidator(this,'customer','customertype')">
+                                                                <option value="default" selected="true" disabled="disabled">
+                                                                    Select Customer Type
+                                                                </option>
+                                                                <option value="Personal">Personal</option>
+                                                                <option value="Business">Business</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Customer Type End-->
+                                                <!-- Customer Status -->
+                                                <div class="col-6">
+                                                    <div class="row d-flex justify-content-start">
+                                                        <div class="col-4">
+                                                            <label for="inputCustomerStatus" class="form-label fw-bold">
+                                                                Customer Status : <span class="text-danger">*</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-7 d-flex">
+                                                            <div class="col-11 justify-content-start">
+                                                                <select type="select" class="form-control"
+                                                                        id="inputCustomerStatus"
+                                                                        onchange="selectDynamicValidator(this,'customer','customer_status_id')">
+                                                                </select>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Please Select Customer Status..!</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Customer Status End-->
+                                            </div>
+                                        </div>
+                                        <!-- Customer Type And Customer Status End -->
+
+                                        <div id="BusinessSection" style="display: none;">
+                                            <!-- Business Name And Business Email -->
+                                            <div class="row mt-1 gy-2">
+                                                <div class="d-flex justify-content-between">
+                                                    <!-- Business Name -->
+                                                    <div class="col-6">
+                                                        <div class="row d-flex justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputBusinessName" class="form-label fw-bold">
+                                                                    Business Name :
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       onkeyup="textValidator(this,'^([A-Za-z\\s\\.]{2,20})+$','customer', 'businessname')"
+                                                                       placeholder="Enter Business Name" id="inputBusinessName">
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Please Enter a valid Business Name..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Business Name End-->
+                                                    <!-- Business Email -->
+                                                    <div class="col-6">
+                                                        <div class="row d-flex justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputBusinessEmail" class="form-label fw-bold">
+                                                                    Business Email :
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7 d-flex">
+                                                                <div class="col-11 justify-content-start">
+                                                                    <input type="text" class="form-control"
+                                                                           placeholder="Enter Business Email" id="inputBusinessEmail"
+                                                                           onkeyup="textValidator(this,'^[A-Za-z0-9\\-\\_\\.]{4,30}[@][a-z]{2,10}([.][a-z]{2,10})+$','customer','businessemail')">
+                                                                    <div class="valid-feedback"></div>
+                                                                    <div class="invalid-feedback">Please Enter a valid Business
+                                                                        Email..!</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Business Email End-->
+                                                </div>
+                                            </div>
+                                            <!-- Business Name And Business Email End -->
+
+                                            <!-- Business Address and Business Contact No. -->
+                                            <div class="row mt-1 gy-2">
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="col-6">
+                                                        <div class="row d-flex justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputBusinessAddress" class="form-label fw-bold">
+                                                                    Business Address :</label>
+                                                            </div>
+                                                            <div class="col-8 ">
+                                                    <textarea class="form-control" name="inputBusinessAddress"
+                                                              id="inputBusinessAddress" rows="2"
+                                                              onkeyup="textValidator(this,'^([A-Za-z0-9\\s\\/\\-]{1,20}[\\,][\\s])+[A-Za-z0-9\\s\\/\\-]{1,25}[.]$','customer', 'businessaddress')"
+                                                              placeholder="Enter Business Address"
+                                                              style="width: 350px;"></textarea>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Please Enter a valid Business Address..!</div>
+                                                            </div>
+                                                            <div class="div col-1"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="row d-flex justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputBusinessTel" class="form-label fw-bold">
+                                                                    Business Telephone :
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7 d-flex">
+                                                                <div class="col-11 justify-content-start">
+                                                                    <input type="text" class="form-control"
+                                                                           placeholder="Enter Business Telephone" id="inputBusinessTel"
+                                                                           onkeyup="textValidator(this,'^[0][12345678][01245678][0-9]{7}$','customer','businesstelephone')">
+                                                                    <div class="valid-feedback"></div>
+                                                                    <div class="invalid-feedback">Please Enter a valid Business Telephone..!</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Business Address and Business Contact No. End -->
+
+                                        </div>
+
+                                        <!-- Description -->
+                                        <div class="row mt-1 gy-2">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="col-12">
+                                                    <div class="row d-flex justify-content-start">
+                                                        <div class="col-2">
+                                                            <label for="inputCustomerDesicription" class="form-label fw-bold">
+                                                                Description
+                                                                :</label>
+                                                        </div>
+                                                        <div class="col-9 ">
+                                                <textarea class="form-control" name="inputCustomerDesicription"
+                                                          id="inputCustomerDesicription" cols="30" rows="2"
+                                                          onkeyup="textValidator(this,'^([A-Za-z0-9\\s\\.]{2,35})+$','customer','description')" placeholder="Enter Description"></textarea>
+                                                            <div class="valid-feedback"></div>
+                                                            <div class="invalid-feedback">Please Enter a valid Description..!</div>
+                                                        </div>
+                                                        <div class="div col-1"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Description End -->
+
+                                        <div class="row mt-3">
+                                            <div class="col-1">
+                                                <button type="reset" id="formRestBtn" class=" btn fw-bold btn-reset formClearBtn"
+                                                        onclick="ClearCustomerFormButtonFunction()">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                            <div class="col-9"></div>
+                                            <div class="col-1">
+                                                <button type="submit" id="formUpdateBtn" onclick="buttonCustomerUpdate()"
+                                                        class=" btn fw-bold btn-update formUpdateBtn">
+                                                    Update
+                                                </button>
+                                            </div>
+                                            <div class="col-1">
+                                                <button type="submit" id="formAddBtn" onclick="submitCustomer()"
+                                                        class="btn btn-primary fw-bold btn-add formAddBtn">
+                                                    Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Table End -->
+                            <div class="row-cols-md-1"></div>
+                        </div>
+                        <!-- Form End -->
+                    </div>
+                </div>
+
+                <script src="script/commonFunction.js"></script>
+                <script src="script/tableCommonFunctions.js"></script>
+                <script src="script/validation.js"></script>
+                <script src="controllerjs/customer.js"></script>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="script/dashboard.js"></script>
+</body>
+
+</html>

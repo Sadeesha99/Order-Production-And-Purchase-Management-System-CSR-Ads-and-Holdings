@@ -1,0 +1,17 @@
+#tableQuotationRequest {
+    background: rgba(255, 255, 255, 0.856);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#formQuotationRequest{
+    background: rgba(255, 255, 255, 0.856);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#tableInnerForm{
+    background: rgba(255, 255, 255, 0.856);
+    border-radius: 5px;
+    padding: 10px;
+}

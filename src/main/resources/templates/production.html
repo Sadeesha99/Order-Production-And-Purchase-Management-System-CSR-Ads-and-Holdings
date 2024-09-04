@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragementHead:: headTagFragment}"></head>
+<head>
+    <!-- Production CSS -->
+    <link rel="stylesheet" href="/css/production.css">
+</head>
+
+
+<body class="sb-nav-fixed">
+
+<nav th:replace="~{fragementNavBars :: topNavFragment}"></nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{fragementNavBars :: sideNavFragment}"></nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main style="margin-top: 22px">
+            <div class="container-fluid mt-2">
+                <!-- Tab links -->
+                <div class="tab">
+                    <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="tableTabButton" data-bs-toggle="tab"
+                                    data-bs-target="#table-tab-pane" type="button" role="tab"
+                                    aria-controls="table-tab-pane"
+                                    aria-selected="true">Production List
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation" style="pointer-events: none;">
+                            <button class="nav-link" id="formTabButton" data-bs-toggle="tab"
+                                    data-bs-target="#form-tab-pane"
+                                    type="button" role="tab" aria-controls="form-tab-pane" aria-selected="false">Edit
+                                Production
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Tab links -->
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="table-tab-pane" role="tabpanel"
+                         aria-labelledby="table-tab"
+                         tabindex="0">
+                        <!-- Table Area Start -->
+                        <div class="row mt-2">
+                            <div class="row-cols-md-1"></div>
+                            <div class="row-cols-md-10 table-responsive" style="width: 100%;">
+                                <!-- Table Start -->
+                                <div class="tableDiv">
+                                    <table class="table table-hover" id="tableProduction">
+                                        <thead class="table-active">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Production No.</th>
+                                            <th>Order No.</th>
+                                            <th>Product Name</th>
+                                            <th>Required Date</th>
+                                            <th>Total Quantity</th>
+                                            <th>Completed Quantity</th>
+                                            <th>Design File</th>
+                                            <th>Status</th>
+                                            <th>Modify</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbodyProduction">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Table End -->
+                            </div>
+                            <div class="row-cols-md-1"></div>
+                        </div>
+                        <!-- Table Area End -->
+                    </div>
+                    <div class="tab-pane fade" id="form-tab-pane" role="tabpanel" aria-labelledby="form-tab"
+                         tabindex="1">
+                        <!-- Form Start -->
+                        <div class="row mt-2">
+                            <div class="row-cols-md-1"></div>
+                            <!-- Table Start -->
+                            <div class="row-cols-md-10">
+                                <form onsubmit="return false" id="formProduction">
+                                    <!-- form onsubmit return is used to stop auto submission and then to force a manual submission -->
+
+                                    <!-- Auto Generated Production no., Back_Button Start-->
+                                    <div class="row" style="margin-bottom: 5px;">
+                                        <div class="col-6">
+                                            <div class="row mt-1 gy-2">
+                                                <div class="justify-content-between">
+                                                    <div class="row formField justify-content-start">
+                                                        <!-- Order No-->
+                                                        <div class="col-4">
+                                                            <label for="inputProductionno" class="form-label fw-bold">
+                                                                Production No. : <span class="text-danger">*</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Auto Generated Production No."
+                                                                   id="inputProductionno" disabled>
+                                                        </div>
+                                                        <!-- Order No End-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row mt-1 gy-2">
+                                                <div class="justify-content-between">
+                                                    <div class="row formField justify-content-start">
+                                                        <div class="col-8"></div>
+                                                        <div class="col-2 fw-bold"><span class="required"><span
+                                                                class="text-danger">*</span>Required</span></div>
+                                                        <div class="col-2" id="backButtonDivForm" display="none">
+                                                            <button type="button" style="width: 100px;"
+                                                                    class="btn text-primary btn-lg"
+                                                                    onclick="backButtonProductionForm()">
+                                                                <i class="fa-regular fa-rectangle-xmark fa-xl"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- Auto Generated Production no., Back_Button End-->
+
+                                    <!-- Auto Generated Order No, Bill Type, Required lable and Back_Button End-->
+                                    <div id="formEditable">
+                                        <div class="row">
+                                            <!-- Form Order Start -->
+                                            <div class="col-6">
+                                                <div class="row mt-1 gy-2">
+                                                    <div class="justify-content-between">
+                                                        <!-- Customer Number -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputCustomerOrderNo"
+                                                                       class="form-label fw-bold">
+                                                                    Customer-Order No : <span
+                                                                        class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Search By Customer Mobile"
+                                                                       id="inputCustomerOrderNo" disabled
+                                                                       autocomplete="off">
+                                                                <div class="valid-feedback"></div>
+                                                            </div>
+                                                        </div>
+                                                        <!--Customer Number Ends-->
+
+                                                        <!-- Required Date -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputRequiredDate"
+                                                                       class="form-label fw-bold">
+                                                                    Required By : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="date" class="form-control"
+                                                                       placeholder="Enter Required Date"
+                                                                       id="inputRequiredDate"
+                                                                       autocomplete="off" onkeydown="return false;"
+                                                                       disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback"></div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Required Date Ends-->
+
+                                                        <!-- Product Name -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputProductName"
+                                                                       class="form-label fw-bold">
+                                                                    Product Name : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto-Filled Product Name"
+                                                                       id="inputProductName"
+                                                                       autocomplete="off" disabled>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Product Name Ends-->
+
+                                                        <!-- Total Production Quantity -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputTotalQuantity"
+                                                                       class="form-label fw-bold">
+                                                                    Total Quantity : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Total Production Quantity"
+                                                                       id="inputTotalQuantity" autocomplete="off"
+                                                                       disabled>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Total Production Quantity Ends-->
+
+                                                        <!-- Completed Production Quantity -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputCompletedQuantity"
+                                                                       class="form-label fw-bold">
+                                                                    Completed Quantity : <span
+                                                                        class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Completed Production Quantity"
+                                                                       id="inputCompletedQuantity" maxlength="8"
+                                                                       autocomplete="off"
+                                                                       disabled>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Completed Production Quantity Ends-->
+
+                                                        <!-- Quantity Update -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputCurrentQuantity"
+                                                                       class="form-label fw-bold">
+                                                                    Current Quantity : <span
+                                                                        class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Quantity Update"
+                                                                       id="inputCurrentQuantity"
+                                                                       autocomplete="off"
+                                                                       onkeyup="textValidator(this,'^([1-9][0-9]{0,5})$','production','current_quantity')">
+                                                            </div>
+                                                        </div>
+                                                        <!-- Quantity Update Ends-->
+
+                                                        <!-- Production Status -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputProductionStatus"
+                                                                       class="form-label fw-bold">
+                                                                    Production Status : <span
+                                                                        class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <select type="select" class="form-control"
+                                                                        placeholder="Select Order Status"
+                                                                        id="inputProductionStatus"
+                                                                        disabled>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Production Status Ends-->
+
+                                                        <!-- Production Line Note -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputProductionLineNote"
+                                                                       class="form-label fw-bold">
+                                                                    Production Line Note :
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                        <textarea class="form-control" id="inputProductionLineNote"
+                                                                  cols="30" rows="2"
+                                                                  onkeyup="textValidator(this,'^([A-Za-z0-9\\s\\.]{2,35})+$','production','production_line_note')"
+                                                                  placeholder="Enter Description"></textarea>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Please Enter a valid
+                                                                    Description..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Production Line Note Ends-->
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!-- Form Order End -->
+
+
+                                            <!-- Form Order Inner-Form and Table Start -->
+                                            <div class="col-6">
+                                                <div id="tableDivInnerForm">
+                                                    <label class="form-label fw-bold" for="tableInnerForm">
+                                                        Material List For Production : <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <!-- table start -->
+                                                    <table id="tableInnerForm" class="table"
+                                                           style="border-radius: 5px;">
+                                                        <thead class="table-active"
+                                                               style="background-color: rgb(179, 192, 214);">
+                                                        <tr>
+                                                            <th> #</th> <!-- # , No , Index  -->
+                                                            <th> Material No</th>
+                                                            <th> Material Name</th>
+                                                            <th> Required Quantity</th>
+                                                            <th> Available Quantity</th>
+                                                        </tr>
+                                                        <tbody id="tbodyMatListInner" class="table-body">
+
+                                                        </tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                    <!-- table send -->
+                                                </div>
+                                                <hr>
+                                                <br>
+                                                <div class="row">
+                                                    <!-- Design File Status -->
+                                                    <div class="row formField justify-content-start">
+                                                        <div class="col-3">
+                                                            <label class="form-label fw-bold" for="inputDesignStatus">
+                                                                Design File Status : <span class="text-danger">*</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <select type="select" class="form-control"
+                                                                    placeholder="Select Order Status"
+                                                                    id="inputDesignStatus"
+                                                                    disabled>
+                                                                <option value="Not-Ready">Not-Ready</option>
+                                                                <option value="Ready">Ready</option>
+                                                                <option value="Removed">Removed</option>
+                                                                <option value="No-Design">No-Design</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <button type="button" id="openDesignFileBtn"
+                                                                    class="btn btn-outline-warning"
+                                                                    style="border-radius: 5px; color: black;">Open File
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Design File Status Ends-->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-1">
+                                                <button type="reset" id="formRestBtn" style="display: none;"
+                                                        class=" btn fw-bold btn-reset formClearBtn"
+                                                        onclick="ClearOrderFormButtonFunction()">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                            <div class="col-9"></div>
+                                            <div class="col-2" id="normalLayOutFooterBtns" style="display: flex;">
+                                                <div class="col-6">
+                                                    <button type="button" id="formPrintBtn" style="display: none;"
+                                                            class=" btn fw-bold btn-update formUpdateBtn">
+                                                        Print
+                                                    </button>
+                                                    <button type="button" id="formAddBtn" style="display: none;"
+                                                            class=" btn fw-bold btn-update formAddBtn">
+                                                        Add
+                                                    </button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button type="button" id="formUpdateBtn"
+                                                            onclick="updateProduction()"
+                                                            class="btn btn-primary fw-bold btn-add formAddBtn">
+                                                        Update
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Table End -->
+                            <div class="row-cols-md-1"></div>
+                        </div>
+                        <!-- Form End -->
+                    </div>
+                </div>
+                <!-- Tab Content end-->
+
+
+            </div>
+
+            <table style="display: none;">
+                <tbody id="tbodyForProductionReport1">
+
+                </tbody>
+            </table>
+            <table style="display: none;">
+                <tbody id="tbodyForProductionReport2">
+
+                </tbody>
+            </table>
+
+
+            <script src="script/commonFunction.js"></script>
+            <script src="script/tableCommonFunctions.js"></script>
+            <script src="script/validation.js"></script>
+            <script src="script/genderBdayBySLIdNo.js"></script>
+            <script src="script/billGenerate.js"></script>
+            <script src="controllerjs/production.js"></script>
+        </main>
+    </div>
+</div>
+<script src="script/dashboard.js"></script>
+</body>
+</html>

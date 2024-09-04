@@ -1,0 +1,219 @@
+<!--Top Nav Bar Fragment Use code below to implement-->
+<!--<nav th:replace="~{fragementNavBars :: topNavFragment}"></nav>-->
+
+<nav th:fragment="topNavFragment" class="sb-topnav navbar navbar-expand navbar-dark bg-dark"
+     style="background-color: rgba(12, 23, 51, 0.98) !important;">
+
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="/dashboard" style="width: auto;"><img alt="csrlog" src="images/logo csr_only.jpg"
+                                                                             style="max-height: 30px; border-radius: 3px;"></a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+        <i class="fa-solid fa-bars fa-2xl" style="color: rgb(255, 255, 255) !important;"></i></button>
+
+    <div style="color:  rgba(255, 255, 255, 0.938); word-spacing: 5px; letter-spacing: 2pt; font-weight: 500; padding-left:10px; font-size: large; cursor: pointer"
+         onclick="window.location.reload();">
+        <span th:text="${navbartitle}"></span>
+    </div>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" >
+        <div class="input-group" style="display: none">
+            <input class="form-control" type="text" placeholder="Search Module" aria-label="Search for..."
+                   aria-describedby="btnNavbarSearch"/>
+            <button class="btn btn-dark" id="btnNavbarSearch"
+                    style="border: 1px solid white; background-color:rgba(12, 23, 51, 0.98) !important;" type="button"
+                    readonly><i class="fas fa-search" style="color: rgb(255, 255, 255) !important;"></i></button>
+        </div>
+    </form>
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                <i class="fas fa-user fa-xl" style="color: rgb(255, 255, 255) !important;"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"
+                style="color: rgb(255, 255, 255) !important;">
+                <li><a class="dropdown-item" href="">Settings</a></li>
+                <li><a class="dropdown-item" href="">Activity Log</a></li>
+                <li>
+                    <hr class="dropdown-divider"/>
+                </li>
+                <li><a class="dropdown-item" style="cursor: pointer;" onclick="let userConfirm = confirm('Do you want to Logout..?');
+                          if (userConfirm) {
+                            window.location.replace('/logout');
+                          }"><span><i class="fa-solid fa-power-off" style="padding-right: 5px;"></i></span>Logout</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+
+<!----------------------------------------------------------------------------------------------------------->
+
+<!--Side Nav Bar Fragment Use code below to implement-->
+<!--<nav th:replace="~{fragementNavBars :: sideNavFragment}"></nav>-->
+
+<nav th:fragment="sideNavFragment" class="sb-sidenav accordion sb-sidenav-dark"
+     style="background-color: rgba(12, 23, 51, 0.801) !important;"
+     id="sidenavAccordion">
+    <div class="sb-sidenav-menu">
+        <div class="nav">
+            <div class="sb-sidenav-menu-heading" style="color: rgb(187, 187, 187) !important;">Core Elements
+            </div>
+            <a class="nav-link" href="/dashboard" style="color: rgb(255, 255, 255) !important;">
+                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"
+                                                 style="color: rgb(255, 255, 255) !important;"></i></div>
+                Dashboard
+            </a>
+            <a class="nav-link" href="/customerorder" style="color: rgb(255, 255, 255) !important;">
+                <div class="sb-nav-link-icon">
+                    <i class="fa-solid fa-file-invoice-dollar"
+                       style="color: rgb(255, 255, 255) !important;"></i>
+                </div>
+                Customer Order
+            </a>
+            <a class="nav-link" href="/customerorderpayment" style="color: rgb(255, 255, 255) !important;">
+                <div class="sb-nav-link-icon">
+                    <i class="fa-solid fa-money-bill"
+                       style="color: rgb(255, 255, 255) !important;"></i>
+                </div>
+                Order Payment</a>
+            <!--modules start-->
+            <div class="sb-sidenav-menu-heading" style="color: rgb(187, 187, 187) !important;">Modules</div>
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdmin"
+               aria-expanded="false" aria-controls="collapseAdmin"
+               style="color: rgb(255, 255, 255) !important;">
+                <!--Administrative modules start-->
+                <div class="sb-nav-link-icon">
+                    <i class="fa-solid fa-user-tie fa-lg"
+                       style="color: rgb(255, 255, 255) !important; padding-right: 3px !important;">
+
+                    </i>
+                </div>
+                Administrative
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"
+                                                          style="color: rgb(255, 255, 255) !important;"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseAdmin" aria-labelledby="headingOne"
+                 data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="/employee" style="color: rgb(255, 255, 255) !important;">Employee
+                        Module</a>
+                    <a class="nav-link" href="/user" style="color: rgb(255, 255, 255) !important;">User
+                        Module</a>
+                    <a class="nav-link" href="/privilege" style="color: rgb(255, 255, 255) !important;">Privilege
+                        Module</a>
+                </nav>
+            </div>
+            <!--Administrative Modules Ends-->
+
+
+            <!--Production Modules Start-->
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+               data-bs-target="#collapseProduction"
+               aria-expanded="false" aria-controls="collapseProduction"
+               style="color: rgb(255, 255, 255) !important;">
+                <div class="sb-nav-link-icon"><i class="fas fa-industry fa-lg"
+                                                 style="color: rgb(255, 255, 255) !important; padding-right: 3px !important;"></i>
+                </div>
+                Production
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"
+                                                          style="color: rgb(255, 255, 255) !important;"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseProduction" aria-labelledby="headingTwo"
+                 data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="/material" style="color: rgb(255, 255, 255) !important;">Material
+                        Module</a>
+                    <a class="nav-link" href="/materialinventorydown" style="color: rgb(255, 255, 255) !important;">Inventory
+                        Down</a>
+                    <a class="nav-link" href="/product" style="color: rgb(255, 255, 255) !important;">Product
+                        Module</a>
+                    <a class="nav-link" href="/production" style="color: rgb(255, 255, 255) !important;">Production
+                        Module</a>
+                </nav>
+            </div>
+            <!--Production Modules Ends-->
+
+
+            <!--Sales Modules Start-->
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+               data-bs-target="#collapseSales"
+               aria-expanded="false" aria-controls="collapseSales"
+               style="color: rgb(255, 255, 255) !important;">
+                <div class="sb-nav-link-icon">
+                    <i class="fa-solid fa-hand-holding-dollar fa-lg" style="color: rgb(255, 255, 255) !important; padding-right: 3px !important;"></i>
+                </div>
+                Sales
+                <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down" style="color: rgb(255, 255, 255) !important;"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseSales" aria-labelledby="headingThree"
+                 data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="/customer" style="color: rgb(255, 255, 255) !important;">Customer
+                        Module</a>
+                    <a class="nav-link" href="/customerorder" style="color: rgb(255, 255, 255) !important;">Customer
+                        Order</a>
+                    <a class="nav-link" href="/customerorderpayment" style="color: rgb(255, 255, 255) !important;">
+                        Order Payment</a>
+                </nav>
+            </div>
+            <!--Sales Modules Ends-->
+
+            <!--Supply Modules Start-->
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+               data-bs-target="#collapseSupply"
+               aria-expanded="false" aria-controls="collapseSales"
+               style="color: rgb(255, 255, 255) !important;">
+                <div class="sb-nav-link-icon">
+                    <i class="fa-solid fa-truck-droplet" style="color: rgb(255, 255, 255) !important; padding-right: 3px !important;"></i>
+                </div>
+                Supply
+                <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down" style="color: rgb(255, 255, 255) !important;"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseSupply" aria-labelledby="headingThree"
+                 data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="/supplier" style="color: rgb(255, 255, 255) !important;">Supplier
+                        Module</a>
+                    <a class="nav-link" href="/quotationrequest" style="color: rgb(255, 255, 255) !important;">Quotation Request</a>
+                    <a class="nav-link" href="/receivedquotation" style="color: rgb(255, 255, 255) !important;">Received Quotation</a>
+                    <a class="nav-link" href="/materialsupplierprice" style="color: rgb(255, 255, 255) !important;">Price Analyzer</a>
+                    <a class="nav-link" href="/purchaseorder" style="color: rgb(255, 255, 255) !important;">Purchase Order</a>
+                    <a class="nav-link" href="/mrn" style="color: rgb(255, 255, 255) !important;">Received Material</a>
+                    <a class="nav-link" href="/supplierpayment" style="color: rgb(255, 255, 255) !important;">Supplier Payment</a>
+                </nav>
+            </div>
+            <!--Supply Modules Ends-->
+
+            <div class="sb-sidenav-menu-heading" style="color: rgb(187, 187, 187) !important;">
+                Reports
+            </div>
+            <a class="nav-link" href="/tablepage" style="color: rgb(255, 255, 255) !important;">
+                <div class="sb-nav-link-icon">
+                    <i class="fas fa-chart-area" style="color: rgb(255, 255, 255) !important;"></i>
+                </div>
+                Tables
+            </a>
+            <a class="nav-link" href="/chartpage" style="color: rgb(255, 255, 255) !important;">
+                <div class="sb-nav-link-icon">
+                    <i class="fas fa-table" style="color: rgb(255, 255, 255) !important;"></i>
+                </div>
+                Charts
+            </a>
+        </div>
+    </div>
+    <div class="sb-sidenav-footer" style="color: rgb(187, 187, 187) !important; background-color: rgba(24, 36, 66, 0.856);">
+        <div class="small" style="color: rgb(187, 187, 187) !important;">
+            Logged User :
+        </div>
+        <span th:text="${loggeduser}"></span>
+    </div>
+</nav>

@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragementHead:: headTagFragment}"></head>
+<head>
+    <!-- Employee CSS -->
+    <link rel="stylesheet" href="/css/customerorder.css">
+</head>
+
+<body class="sb-nav-fixed">
+
+<nav th:replace="~{fragementNavBars :: topNavFragment}"></nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{fragementNavBars :: sideNavFragment}"></nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main style="margin-top: 22px">
+            <div class="container-fluid px-4">
+                <div class="tab">
+                    <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="formTabButton" data-bs-toggle="tab"
+                                    data-bs-target="#form-tab-pane" type="button" role="tab"
+                                    aria-controls="form-tab-pane"
+                                    aria-selected="true">Add New Order
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="tableTabButton" data-bs-toggle="tab"
+                                    data-bs-target="#table-tab-pane"
+                                    type="button" role="tab" aria-controls="table-tab-pane" aria-selected="false">Order
+                                List
+                            </button>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="form-tab-pane" role="tabpanel" aria-labelledby="form-tab"
+                         tabindex="0">
+                        <!-- Form Start -->
+                        <div class="row mt-2">
+                            <div class="cols-md-10">
+                                <form onsubmit="return false" id="formCustOrder">
+                                    <!-- Auto Generated Order No,Bill Type, Required lable and Back_Button Start-->
+                                    <div class="row mt-1" style="margin-bottom: 8px;">
+                                        <div class="d-flex">
+                                            <div class="div col-8">
+                                                <div class="row d-flex">
+                                                    <div class="col-6 d-flex">
+                                                        <!-- Order No-->
+                                                        <div class="col-6">
+                                                            <label for="inputCustomerOrderNo"
+                                                                   class="form-label fw-bold">
+                                                                Customer-Order No. : <span class="text-danger">*</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Auto Generated Order No."
+                                                                   id="inputCustomerOrderNo"
+                                                                   disabled>
+                                                        </div>
+                                                        <!-- Order No End-->
+                                                    </div>
+                                                    <div class="col-6 d-flex">
+                                                        <!-- Bill Type Start -->
+                                                        <div class="col-3"></div>
+                                                        <div class="col-4">
+                                                            <label for="inputBillType" class="form-label fw-bold">
+                                                                Billing Type : <span class="text-danger">*</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <select name="InvoiceBillType" id="inputBillType"
+                                                                    class="form-select">
+                                                                <option value="Invoice" selected="true">Invoice
+                                                                </option>
+                                                                <option value="Quotation">Quotation</option>
+                                                            </select>
+                                                        </div>
+                                                        <!-- Bill Type End -->
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-2">
+
+
+                                            </div>
+
+                                            <!-- Required Label Start-->
+                                            <div class="col-1 fw-bold">
+                                                <span class="required"><span class="text-danger">*</span>Required</span>
+                                            </div>
+                                            <!-- Required Label End-->
+
+                                            <!-- Back Button Section-->
+                                            <div class="col-1" id="backButtonDivFormFirst">
+                                                <button type="button" style="width: 100px;"
+                                                        class="btn text-primary btn-lg"
+                                                        onclick="backButtonOrderForm()">
+                                                    <i class="fa-regular fa-rectangle-xmark fa-xl"></i>
+                                                </button>
+                                            </div>
+                                            <!-- Back Button Section End-->
+                                        </div>
+                                    </div>
+                                    <!-- Auto Generated Order No, Bill Type, Required lable and Back_Button End-->
+                                    <div id="formEditable">
+                                        <div class="row">
+                                            <!-- Form Order Start -->
+                                            <div class="col-6">
+                                                <!-- Customer Number, Service Charges And Order Total Bill -->
+                                                <div class="row mt-1 gy-2">
+                                                    <div class="justify-content-between">
+                                                        <!-- Customer Number -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputCustomerMobile"
+                                                                       class="form-label fw-bold">
+                                                                    Customer Mobile : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Search By Customer Mobile"
+                                                                       id="inputCustomerMobile" maxlength="10"
+                                                                       autocomplete="off">
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Customer is not valid..
+                                                                </div>
+                                                                <div id="divResultByCustomerName"
+                                                                     class="divSearchResult"
+                                                                     style="max-width: 330px;"></div>
+                                                            </div>
+                                                            <div class="col-2 d-flex align-items-center">
+                                                                <!-- Button trigger modal -->
+                                                                <button type="button" id="addCustomerBtn"
+                                                                        class="btn btn-outline-dark btn-sm"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#addCustomerBackdrop"
+                                                                        title="Click Here To Add New Customer">
+                                                                    <i class="fa-solid fa-plus"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <!--Customer Number Ends-->
+
+                                                        <!-- Customer Name -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputCustomerName"
+                                                                       class="form-label fw-bold">
+                                                                    Customer Name : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto-Filled Customer Name"
+                                                                       id="inputCustomerName" autocomplete="off"
+                                                                       disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Customer is not valid..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Customer Name Ends-->
+
+                                                        <!-- Required Date -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputRequiredDate"
+                                                                       class="form-label fw-bold">
+                                                                    Required Date : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="date" class="form-control"
+                                                                       placeholder="Enter Required Date"
+                                                                       id="inputRequiredDate"
+                                                                       autocomplete="off" onkeydown="return false;">
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Date must not exceed next
+                                                                    month..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Required Date Ends-->
+
+                                                        <!-- First Payment -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputFirstPayement"
+                                                                       class="form-label fw-bold">
+                                                                    First Payment : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Enter First Payment"
+                                                                       id="inputFirstPayement"
+                                                                       maxlength="8"
+                                                                       onkeyup="textValidator(this,'^(([1-9][0-9]{0,5})|([1-9][0-9]{0,5}[.][0-9]{2}))?$','customerorder', 'first_payment')"
+                                                                       autocomplete="off" disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Please Enter a Valid
+                                                                    Amount
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- First Payment Ends-->
+
+                                                        <!-- Remaining Balance -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputCustomerOrderRemainingBalance"
+                                                                       class="form-label fw-bold">
+                                                                    Remaining Balance : <span
+                                                                        class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto-Filled Remaining Balance"
+                                                                       id="inputCustomerOrderRemainingBalance"
+                                                                       maxlength="8"
+                                                                       autocomplete="off" disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback"></div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Remaining Balance Ends-->
+
+                                                        <!-- Order Total Bill -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputCustomerOrderTotalPrice"
+                                                                       class="form-label fw-bold">
+                                                                    Total Bill : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto-Filled Order Total Bill"
+                                                                       id="inputCustomerOrderTotalPrice"
+                                                                       autocomplete="off"
+                                                                       disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Customer-Order Price is
+                                                                    not
+                                                                    correct..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Order Total Bill Ends-->
+
+                                                        <!-- Order Status -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputCustomerOrderStatus"
+                                                                       class="form-label fw-bold">
+                                                                    Order Status : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <select type="select" class="form-control"
+                                                                        placeholder="Select Order Status"
+                                                                        id="inputCustomerOrderStatus">
+                                                                </select>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Please Order Status..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Order Status Ends-->
+
+                                                        <!-- Order Descripition -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputCustomerOrderDesicription"
+                                                                       class="form-label fw-bold">
+                                                                    Order Descripition : <span
+                                                                        class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                        <textarea class="form-control"
+                                                                  id="inputCustomerOrderDesicription" cols="30" rows="2"
+                                                                  onkeyup="textValidator(this,'^([A-Za-z0-9\\s\\.]{2,35})+$','customerorder','description')"
+                                                                  placeholder="Enter Description"></textarea>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Please Enter a valid
+                                                                    Description..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Order Descripition Ends-->
+                                                    </div>
+                                                </div>
+                                                <!--  Customer Number, Service Charges, Order Total Bill And Description End -->
+
+                                            </div>
+                                            <!-- Form Order End -->
+
+
+                                            <!-- Form Order Inner-Form and Table Start -->
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <!-- Product Search By Name -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="row">
+                                                                <label for="inputProductName"
+                                                                       class="form-label fw-bold">
+                                                                    Product Name : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Search By Product Name"
+                                                                       id="inputProductName"
+                                                                       autocomplete="off">
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Product is not valid..
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div id="divResultByProductName" class="divSearchResult"
+                                                                     style="max-width: 330px;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Product Search By Name Ends-->
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <!-- Product ID Auto Filled -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="row">
+                                                                <label for="inputProductNo" class="form-label fw-bold">
+                                                                    Product No. : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto-Filled Product No."
+                                                                       id="inputProductNo"
+                                                                       autocomplete="off" disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Product is not valid..
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Product ID Auto Filled Ends-->
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <!-- Unit Quantity -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="row">
+                                                                <label for="inputProductUnitQuantity"
+                                                                       class="form-label fw-bold">
+                                                                    Unit Quantity : <span
+                                                                        class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="row d-flex">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Enter Quantity"
+                                                                       id="inputProductUnitQuantity"
+                                                                       onkeyup="textValidator(this,'^(([1-9][0-9]{0,6})|([0-9]{0,5}[\\.][0-9]{0,2}))$','customerorderhasproduct','quantity')"
+                                                                       disabled autocomplete="off">
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Please Enter a Unit
+                                                                    Quantity..!
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- Unit Quantity Ends-->
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <!-- Unit Price -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="row">
+                                                                <label for="inputProductUnitPrice"
+                                                                       class="form-label fw-bold">
+                                                                    Product Unit Price : <span
+                                                                        class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto-Filled Unit Price"
+                                                                       id="inputProductUnitPrice" disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Unit Price is not valid..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Unit Price Ends-->
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <!-- Line Price -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="row">
+                                                                <label for="inputProductLinePrice"
+                                                                       class="form-label fw-bold">
+                                                                    Product Line Price : <span
+                                                                        class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto-Filled Line Price"
+                                                                       id="inputProductLinePrice" disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Line Price is not valid..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Line Price Ends-->
+                                                    </div>
+                                                </div>
+
+
+                                                <!-- Design mode select -->
+                                                <div class="row" style="margin-top: 5px; margin-bottom: 10px;">
+                                                    <!-- checkbox section -->
+                                                    <div class="col-4">
+                                                        <input type="checkbox" id="designStatus" name="designStatus"
+                                                               value="designbycustomer" checked>
+                                                        <label for="designStatus">Design Provided By Customer</label>
+                                                    </div>
+                                                    <!-- checkbox section End-->
+                                                    <div class="col-8">
+                                                        <!-- Design Add section -->
+                                                        <div class="row">
+                                                            <!-- Design By Customer -->
+                                                            <div id="designAddField">
+                                                                <label for="inputDesignFile"
+                                                                       class="form-label fw-bold"></label>
+                                                                <input type="file" id="inputDesignFile"
+                                                                       name="inputDesignFile"
+                                                                       accept="image/*,.doc,.docx,.pdf,.psb,.psd,.HEIC">
+                                                                <button type="button"
+                                                                        style="display: none; margin-right: 5px;"
+                                                                        class="btn btn-outline-primary btn-sm"
+                                                                        id="openFileBtn">Open
+                                                                    File
+                                                                </button>
+                                                                <button type="button" style="display: none;"
+                                                                        class="btn btn-outline-danger btn-sm"
+                                                                        id="clearFileBtn">Clear File
+                                                                </button>
+                                                            </div>
+
+                                                            <!-- Design By Customer Ends -->
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <!-- Design By Company -->
+                                                            <div style="display: none;" id="designDivSection">
+                                                                <div class="col-2">
+                                                                    <label for="inputDesign" class="form-label fw-bold">
+                                                                        Design : </span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-7 ">
+                                                                    <input type="text" class="form-control"
+                                                                           placeholder="Search By Design"
+                                                                           id="inputDesign"
+                                                                           autocomplete="off">
+                                                                    <div class="valid-feedback"></div>
+                                                                    <div class="invalid-feedback">Design is not
+                                                                        valid..
+                                                                    </div>
+                                                                    <div id="divResultByDesignName"
+                                                                         class="divSearchResult"
+                                                                         style="max-width: 330px;"></div>
+                                                                </div>
+                                                                <div class="col-2 d-flex align-items-center"
+                                                                     style="padding-left: 5px;">
+                                                                    <!-- Button trigger modal -->
+                                                                    <button type="button" id="addDesignBtn"
+                                                                            class="btn btn-outline-dark btn-sm"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#addDesignBackdrop"
+                                                                            title="Click Here To Add New Design">
+                                                                        <i class="fa-solid fa-plus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Design By Company Ends -->
+                                                        </div>
+                                                        <div class="col-12" id="productDesignErrorDiv"
+                                                             style="color: #dcb535; display:none; font-size: .875em;">
+                                                            Design is
+                                                            not added to this Product..!
+                                                        </div>
+                                                        <!-- Design Add section End-->
+
+                                                    </div>
+
+                                                </div>
+                                                <!-- Design mode select End -->
+
+                                                <div class="row formField">
+                                                    <div class="row">
+                                                        <div class="col-12" id="orderProductErrorDiv"
+                                                             style="color: red; display:none;">Add Products to Order..!
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12 text-end">
+                                                            <button type="button" id="buttonClearProduct"
+                                                                    class="btn btn-outline-dark me-2">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                            <button type="button" id="buttonAddProduct"
+                                                                    class="btn btn-outline-primary">
+                                                                <i class="fas fa-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div id="tableDivInnerForm">
+                                                    <!-- table start -->
+                                                    <table id="tableInnerForm" class="table table-hover"
+                                                           style="border-radius: 5px;">
+                                                        <thead class="table-active"
+                                                               style="background-color: rgb(179, 192, 214);">
+                                                        <tr>
+                                                            <th> #</th> <!-- # , No , Index  -->
+                                                            <th> Product Name</th>
+                                                            <th> Unit Price (Rs.)</th>
+                                                            <th> Quantity</th>
+                                                            <th> Total (Rs.)</th>
+                                                            <th> Design</th>
+                                                            <th> Modify</th>
+                                                        </tr>
+                                                        </thead>
+
+                                                        <tbody id="tableInnerFormBody" class="table-body">
+
+                                                        </tbody>
+                                                    </table>
+                                                    <!-- table send -->
+                                                </div>
+
+                                            </div>
+                                            <!-- Form Order Inner-Form and Table Ends -->
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-1">
+                                                <button type="reset" id="formRestBtn"
+                                                        class=" btn fw-bold btn-reset formClearBtn"
+                                                        onclick="ClearOrderFormButtonFunction()">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                            <div class="col-9"></div>
+                                            <div class="col-2" id="normalLayOutFooterBtns" style="display: flex;">
+                                                <div class="col-6">
+                                                    <button type="button" id="formUpdateBtn" style="display: none;"
+                                                            class=" btn fw-bold btn-update formUpdateBtn">
+                                                        Update
+                                                    </button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button type="button" id="formAddBtn"
+                                                            onclick="submitCustomerOrder()"
+                                                            class="btn btn-primary fw-bold btn-add formAddBtn">
+                                                        Add
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-2" id="quotationLayOutFooterBtns" style="display: none;">
+                                                <div class="col-6"></div>
+                                                <div class="col-6">
+                                                    <button type="button" id="quotationPrintButton"
+                                                            class="btn btn-primary fw-bold btn-add formAddBtn">
+                                                        Print
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Form End -->
+                    </div>
+                    <div class="tab-pane fade" id="table-tab-pane" role="tabpanel" aria-labelledby="table-tab"
+                         tabindex="1">
+                        <!-- Table Area Start -->
+                        <div class="row mt-2">
+                            <div class="row-cols-md-1"></div>
+                            <div class="row-cols-md-10 table-responsive" style="width: 100%;">
+                                <!-- Table Start -->
+                                <div class="tableDiv">
+                                    <table class="table table-hover" id="tableCustOrder">
+                                        <thead class="table-active">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Order No.</th>
+                                            <th>Required Date</th>
+                                            <th>Balance</th>
+                                            <th>Total Bill</th>
+                                            <th>Order Status</th>
+                                            <th>Customer Name</th>
+                                            <th>Customer Mobile</th>
+                                            <th>Modify</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbodyCustOrder">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Table End -->
+                            </div>
+                            <div class="row-cols-md-1"></div>
+                        </div>
+                        <!-- Table Area End -->
+                    </div>
+                </div>
+
+                <!-- Inner Form Modals -->
+
+                <!-- Add New Customer Starts -->
+                <div class="modal fade " id="addCustomerBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                     tabindex="-1" aria-labelledby="addCustomerBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="addCustomerBackdropLabel">Add New Customer</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                        id="closeCustomerModal" onclick="closeBtnAddNewCustomer();"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Customer Name -->
+                                <div class="row" style="padding-left: 25px;">
+                                    <div class="row d-flex justify-content-start">
+                                        <label for="inputInnerCustomerName" class="form-label fw-bold">
+                                            Customer Name : <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" placeholder="Enter Customer Name"
+                                               id="inputInnerCustomerName"
+                                               onkeyup="textValidator(this,'^([A-Za-z\\s\\.]{2,20})+$','customer', 'name')">
+                                        <div class="valid-feedback"></div>
+                                        <div class="invalid-feedback">Please Enter a valid Customer Name..!
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Customer Name Ends-->
+                                <!-- Customer Mobile -->
+                                <div class="row" style="padding-left: 25px; margin-top: 10px;">
+                                    <div class="row d-flex justify-content-start">
+                                        <label for="inputInnerCustomerMobile" class="form-label fw-bold">
+                                            Customer Mobile : <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" placeholder="Enter Customer Mobile"
+                                               id="inputInnerCustomerMobile"
+                                               onkeyup="textValidator(this,'^[0][7][01245678][0-9]{7}$','customer', 'mobile')">
+                                        <div class="valid-feedback"></div>
+                                        <div class="invalid-feedback">Please Enter a valid Customer Mobile...!
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Customer Mobile Ends-->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger" id="clearBtnNewCustomer"
+                                        onclick="closeBtnAddNewCustomer();">Clear
+                                </button>
+                                <button type="button" class="btn btn-outline-primary" id="addNewCustomerModalBtn"
+                                        onclick="submitNewCustomer();">Add New Customer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add New Customer Ends-->
+
+                <!-- New Design -->
+                <div class="modal fade " id="addDesignBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                     tabindex="-1"
+                     aria-labelledby="addDesignBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="addDesignBackdropLabel">Add New Design </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                        id="closeDesignModal" onclick="closeBtnAddNewDesign();"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Design Name-->
+                                <div class="row" style="padding-left: 25px;">
+                                    <div class="row d-flex justify-content-start">
+                                        <label for="inputDesignName" class="form-label fw-bold">
+                                            Design Name : <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" placeholder="Enter Design Name"
+                                               id="inputDesignName"
+                                               onkeyup="textValidator(this,'^([A-Za-z\\s\\.]{2,20})+$','design', 'name')">
+                                        <div class="valid-feedback"></div>
+                                        <div class="invalid-feedback">Please Enter a valid Design Name..!(Ex:- Super Market Flyer)
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Design Name Ends-->
+                                <!-- Design Charges -->
+                                <div class="row" style="padding-left: 25px; margin-top: 10px;">
+                                    <div class="row d-flex justify-content-start">
+                                        <label for="inputDesignCharges" class="form-label fw-bold">
+                                            Design Charges : <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" placeholder="Enter Design Charges"
+                                               id="inputDesignCharges"
+                                               onkeyup="textValidator(this,'^(([1-9][0-9]{0,3})|([1-9][0-9]{0,3}[.][0-9]{2}))?$','design', 'charges')">
+                                        <div class="valid-feedback"></div>
+                                        <div class="invalid-feedback">Please Enter a valid amount...! (Ex:- 250 or 250.50)
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Design Charges Ends -->
+                                <!-- Design Note -->
+                                <div class="row" style="padding-left: 25px; margin-top: 10px;">
+                                    <div class="row d-flex justify-content-start">
+                                        <label for="inputDesignNote" class="form-label fw-bold">
+                                            Design Note : <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" placeholder="Enter Design Note"
+                                               id="inputDesignNote"
+                                               onkeyup="textValidator(this,'^([A-Za-z0-9\\s.,\\(\\)]{0,25})+$','design', 'note')">
+                                        <div class="valid-feedback"></div>
+                                        <div class="invalid-feedback">Please Enter a valid note...!
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Design Note Ends -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger" id="clearBtnNewDesign"
+                                        onclick="closeBtnAddNewDesign();">Clear
+                                </button>
+                                <button type="button" class="btn btn-outline-primary" id="addNewDesignModalBtn"
+                                        onclick="submitNewDesign();">Add New Design
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Design Ends -->
+
+                <!-- Inner Form Modals -->
+
+                <table style="display: none;">
+                    <tbody id="tbodyForBill">
+                    </tbody>
+                </table>
+
+                <script src="script/commonFunction.js"></script>
+                <script src="script/tableCommonFunctions.js"></script>
+                <script src="script/validation.js"></script>
+                <script src="controllerjs/customerorder.js"></script>
+                <script src="script/billGenerate.js"></script>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="script/dashboard.js"></script>
+</body>
+
+</html>

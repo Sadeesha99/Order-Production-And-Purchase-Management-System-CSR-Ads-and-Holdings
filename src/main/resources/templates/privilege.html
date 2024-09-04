@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragementHead:: headTagFragment}"></head>
+<head>
+    <!-- Module CSS -->
+    <link rel="stylesheet" href="/css/privilege.css">
+
+</head>
+
+
+<body class="sb-nav-fixed">
+
+<nav th:replace="~{fragementNavBars :: topNavFragment}"></nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{fragementNavBars :: sideNavFragment}"></nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main style="margin-top: 22px">
+            <div class="container-fluid px-4">
+                <!-- Form Access Button Area Start -->
+                <div class="row mt-2">
+                    <!-- empty space for alignment -->
+                    <div class="col-md-8"></div>
+                    <!-- Button Add/Edit Employees -->
+                    <div class="col-md-4 text-end">
+                        <button type="button" class="btn" id="addToTableButton" data-bs-toggle="modal"
+                                data-bs-target="#modalRoleAdd">
+                            <i class="fa-solid fa-plus"></i> Add New Role
+                        </button>
+                    </div>
+                </div>
+                <!-- Form Access Button Area End -->
+
+                <!-- Table Area Start -->
+                <div class="row mt-2">
+                    <div class="row-cols-md-1"></div>
+                    <!-- Table Start -->
+                    <div class="row-cols-md-10">
+                        <table class="table table-bordered table-hover" id="tableRoles">
+                            <thead class="table-active">
+                            <tr>
+                                <th>#</th>
+                                <th>Role Name</th>
+                                <th>List of Modules</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbodyValue">
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Table End -->
+                    <div class="row-cols-md-1"></div>
+                </div>
+                <!-- Table Area End -->
+                <!------------------------- Modal Form Area Start -------------------------------------------->
+                <div class="modal" id="modalRoleAdd" data-bs-backdrop="static" data-bs-keyboard="false">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <!-- Heading For the Form -->
+                            <div class="modal-header">
+                                <h4>Add/Edit Roles</h4>
+                                <button type="button" id="closeModalBtn" class="btn-close" data-bs-dismiss="modal"
+                                        onclick="backButtonPrivilegeForm()"></button>
+                            </div>
+                            <!-- Heading For the Form End-->
+
+                            <!-- Body of the Form Start-->
+                            <div class="modal-body">
+                                <!-- Form Start -->
+                                <div class="card form-area">
+                                    <div class="card-body">
+                                        <!-- form onsubmit return is used to stop auto submission and then to force a manual submission -->
+                                        <form onsubmit="return false" id="formPrivilege">
+                                            <div id="formEditableArea">
+                                                <!-- Required Label-->
+                                                <div class="row mt-1 ">
+                                                    <div class="d-flex justify-content-start">
+                                                        <div class="div col-11"></div>
+                                                        <div class="col-1">
+                                            <span class="required"><span
+                                                    class="text-danger">*</span>Required</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Required Label End-->
+
+                                                <!-- Search Role By Roled ID And Role Name -->
+                                                <div class="row mt-1 gy-2">
+                                                    <div class="d-flex justify-content-between">
+                                                        <!-- RoleID -->
+                                                        <div class="col-6">
+                                                            <div class="row justify-content-start">
+                                                                <div class="col-4">
+                                                                    <label for="inputRole" class="form-label fw-bold">
+                                                                        Role Name : <span class="text-danger">*</span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <input type="text" class="form-control"
+                                                                           placeholder="Search By Role Name " id="inputRole"
+                                                                           autocomplete="off">
+                                                                    <div class="valid-feedback"></div>
+                                                                    <div class="invalid-feedback">Looks like this Role name in
+                                                                        incorrect..!
+                                                                    </div>
+                                                                    <div id="divResultByRoleName" class="divSearchResult">
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- RoleID End-->
+                                                        <!-- Role Name -->
+                                                        <div class="col-6">
+                                                            <div class="row justify-content-start">
+                                                                <div class="col-4">
+                                                                    <label for="inputModule" class="form-label fw-bold">
+                                                                        Module Name : <span class="text-danger">*</span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <input type="text" class="form-control"
+                                                                           placeholder="Search By Module Name" id="inputModule"
+                                                                           autocomplete="off" disabled>
+                                                                    <div class="valid-feedback"></div>
+                                                                    <div class="invalid-feedback">Looks like this Module name in
+                                                                        incorrect..!
+                                                                    </div>
+                                                                    <div id="divResultByModuleName" class="divSearchResult">
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- Role Name End-->
+                                                    </div>
+                                                </div>
+                                                <!-- Search Role By Roled ID And Role Name End -->
+
+
+                                                <!-- Module Table -->
+                                                <div class="row mt-1 gy-2">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="col-12">
+                                                            <table class="table table-bordered table-hover" id="tableModulesOfRoles">
+                                                                <thead class="table-active">
+                                                                <!-- Module Table Headings-->
+                                                                <tr>
+                                                                    <th colspan="4">Permissions for the module</th>
+                                                                </tr>
+                                                                <!-- Module Table Headings End-->
+                                                                </thead>
+                                                                <tbody id="tbModulePrivi">
+                                                                <td><input type="checkbox" style="margin-right:4px;" id="Select_privi"
+                                                                           onclick="onclickPriviSet(this,'sel_privi')"></input>
+                                                                    <div class="valid-feedback"></div>
+                                                                    <label for="Select_privi">View</label>
+                                                                <td><input type="checkbox" style="margin-right:4px;" id="Insert_privi"
+                                                                           onclick="onclickPriviSet(this,'ins_privi')"></input>
+                                                                    <label for="Insert_privi">Insert</label></td>
+                                                                <td><input type="checkbox" style="margin-right:4px;" id="Update_privi"
+                                                                           onclick="onclickPriviSet(this,'upd_privi')"></input>
+                                                                    <label for="Update_privi">Update</label></td>
+                                                                <td><input type="checkbox" style="margin-right:4px;" id="Delete_privi"
+                                                                           onclick="onclickPriviSet(this,'del_privi')"></input>
+                                                                    <label for="Delete_privi">Delete</label></td>
+                                                                </tbody>
+                                                            </table>
+                                                            <div id="tableInValidFeedback" style="color: red; display: none;">Please
+                                                                Enter Privileges.!
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Module Table End -->
+                                                <!-- Form Buttons -->
+                                                <div class="row mt-3">
+                                                    <div class="col-1">
+                                                        <button type="reset" id="formRestBtn"
+                                                                class=" btn fw-bold btn-reset formClearBtn"
+                                                                onclick="ClearPrivilegFormButton();">
+                                                            Clear
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-9"></div>
+                                                    <div class="col-1">
+                                                        <button type="submit" id="formUpdateBtn"
+                                                                class=" btn fw-bold btn-update formUpdateBtn"
+                                                                onclick="updatePrivileges();">
+                                                            Update
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <button type="submit" id="formAddBtn" onclick="submitPrivileges();"
+                                                                class="btn btn-primary fw-bold btn-add formAddBtn">
+                                                            Add
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <!-- Form Buttons -->
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- Form End -->
+                            </div>
+                            <!-- Body of the Form End-->
+                        </div>
+                    </div>
+                </div>
+                <!------------------------- Modal Form Area End -------------------------------------------->
+
+                <script src="script/commonFunction.js"></script>
+                <script src="script/tableCommonFunctions.js"></script>
+                <script src="script/validation.js"></script>
+                <script src="controllerjs/privilege.js"></script>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="script/dashboard.js"></script>
+</body>
+
+
+
+
+</html>

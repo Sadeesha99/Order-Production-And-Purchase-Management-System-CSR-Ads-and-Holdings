@@ -1,0 +1,164 @@
+.table-header {
+  background-color: rgb(46, 66, 134);
+  color: rgb(0, 0, 0);
+}
+
+body {
+  background: rgb(21, 71, 193);
+  background: linear-gradient(90deg, rgba(41, 77, 168, 0.74) 0%, rgb(42, 120, 156) 32%, rgba(16, 36, 87, 0.98) 83%);
+  background-size: cover;
+
+}
+
+.title-div {
+  color: rgb(248, 248, 226);
+  background-color: rgba(58, 55, 55, 0.842);
+}
+
+.navBarItem {
+  color: #f1f1f1 !important;
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #fffffff3;
+  background-color: #f1f1f1;
+  border-radius: 6px;
+  width: 302px;
+}
+
+.tab .nav .nav-link {
+  color: rgb(1, 0, 20) !important;
+  width: 150px;
+}
+
+.tab .nav .active {
+  background-color:rgba(12, 23, 51, 0.945);
+  color: rgb(255, 255, 255) !important;
+}
+
+#backButtonDivFormFirst {
+  display: none;
+}
+
+a.nav-link:hover{
+  background-color: rgba(255, 255, 255, 0.301);
+}
+
+/*
+#formTabButton.active,#tableTabButton.active{
+    background-color: rgb(17, 86, 216);
+  }
+  #formTabButton,#tableTabButton{
+   color: rgb(2, 10, 26);
+  } */
+
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.2s;
+}
+
+#formRestBtn {
+  border: solid #b4b1b1 1px;
+}
+
+#formRestBtn:active {
+  background-color: rgb(255, 0, 0);
+}
+
+#formUpdateBtn {
+  border: solid #b4b1b1 1px;
+}
+
+#formUpdateBtn:active {
+  background-color: rgb(145, 184, 243);
+}
+
+.tableDiv {
+  padding: 6px;
+  background-color: rgb(252, 252, 252);
+  border-radius: 5px;
+  max-width: 100%;
+}
+
+.divSearchResult ul option {
+  list-style-type: none;
+  padding-top: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+
+}
+
+.divSearchResult ul option:hover {
+  background-color: #d9e8fa;
+  border-radius: 5px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.divSearchResult {
+  border-radius: 5px;
+  width: 400px;
+  background-color: rgba(195, 196, 202, 0.884);
+  list-style-type: none;
+  position: absolute;
+  max-height: 150px;
+  overflow-y: scroll;
+  z-index: 1000;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(124, 120, 120);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  height: 50%;
+  background: rgba(12, 23, 51, 0.945)
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+   background: rgba(255, 255, 255, 0.856);
+}
+::-webkit-scrollbar-track:hover {
+  background: rgba(12, 23, 51, 0.945)
+}
+
+
+.formField{
+  margin-bottom:10px;
+}
+
+.moduleMainForm {
+  background: rgba(255, 255, 255, 0.856);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.moduleMainTable {
+  background: rgba(255, 255, 255, 0.856);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.tableInnerForm{
+  background: rgba(255, 255, 255, 0.856);
+  border-radius: 5px;
+  padding: 10px;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragementHead:: headTagFragment}"></head>
+<body class="sb-nav-fixed">
+
+<nav th:replace="~{fragementNavBars :: topNavFragment}"></nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{fragementNavBars :: sideNavFragment}"></nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main style="margin-top: 22px">
+            <div class="container-fluid px-4">
+                <!-- Form Start -->
+                <div class="row mt-2">
+                    <div class="cols-md-10">
+                        <form onsubmit="return false" id="formMaterialSupplierPrice" class="moduleMainForm" >
+
+                            <div id="formEditable" style="margin-left: 10px;">
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="row mt-1 gy-2">
+                                                <div class="justify-content-between">
+                                                    <!-- Start Date -->
+                                                    <div class="row formField justify-content-start">
+                                                        <div class="col-4">
+                                                            <label for="inputStartDate" class="form-label fw-bold">
+                                                                Start Date : <span class="text-danger">*</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input type="date" class="form-control" id="inputStartDate"
+                                                                   autocomplete="off" onkeydown="return false;">
+                                                            <div class="valid-feedback"></div>
+                                                            <div class="invalid-feedback">Select valid date..!
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Start Date Ends-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="row mt-1 gy-2">
+                                                <div class="justify-content-between">
+                                                    <!-- End Date -->
+                                                    <div class="row formField justify-content-start">
+                                                        <div class="col-4">
+                                                            <label for="inputEndDate" class="form-label fw-bold">
+                                                                End Date : <span class="text-danger">*</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input type="date" class="form-control" id="inputEndDate"
+                                                                   autocomplete="off" onkeydown="return false;">
+                                                            <div class="valid-feedback"></div>
+                                                            <div class="invalid-feedback">Select valid date..!
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Date Ends-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="row mt-1 gy-2">
+                                                <div class="justify-content-between">
+                                                    <button type="button" id="formAddBtn"
+                                                            onclick="generatematerialusagereport()"
+                                                            style="color: black !important; width: 60%"
+                                                            class="btn btn-outline-primary fw-bold btn-add formAddBtn">
+                                                        Generate Report
+                                                    </button>
+                                                    <button type="button" id="formClearBtn"
+                                                            onclick="clearmaterialusagereport()"
+                                                            style="color: black !important; margin-left: 5px;"
+                                                            class="btn btn-outline-warning fw-bold btn-add formAddBtn">
+                                                        Clear
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr>
+                                    <div class="row" id="NoRecordsMessage" style="display: none;">
+                                        <div class="col-4">
+                                            <div class="row mt-1 gy-2">
+                                                <div class="justify-content-between">
+                                                    <p>There are no valid records found..!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="MaterialUsageReportTableDiv">
+                                        <div class="col-11">
+                                            <!-- Table Start -->
+                                            <div class="tableDiv">
+                                                <canvas id="reportChart" style="max-width:900px"></canvas>
+                                            </div>
+                                            <!-- Table End -->
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Form End -->
+
+                <script src="script/chartCommon.js"></script>
+                <script src="script/commonFunction.js"></script>
+                <script src="script/tableCommonFunctions.js"></script>
+                <script src="script/validation.js"></script>
+                <script src="controllerjs/dailymaterialusagereportchart.js"></script>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="script/dashboard.js"></script>
+</body>
+
+</html>

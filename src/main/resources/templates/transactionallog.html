@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragementHead:: headTagFragment}"></head>
+<head>
+    <!-- Module CSS -->
+    <link rel="stylesheet" href="/css/material.css">
+</head>
+
+<body class="sb-nav-fixed">
+
+<nav th:replace="~{fragementNavBars :: topNavFragment}"></nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{fragementNavBars :: sideNavFragment}"></nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main style="margin-top: 22px">
+            <div class="container-fluid px-4">
+
+                <div class="row" style="margin-top: 10px;">
+                    <div class="row-cols-md-1"></div>
+                    <div class="row-cols-md-10 table-responsive" style="width: 100%;">
+                        <!-- Table Start -->
+                        <div class="tableDiv">
+                            <table class="table table-hover" id="tableTransaction">
+                                <thead class="table-active">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Process No</th>
+                                    <th>Amount</th>
+                                    <th>Transaction Type</th>
+                                    <th>Logged Date</th>
+                                    <th>Logged Time</th>
+                                    <th>Username</th>
+                                    <th>Employee</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbodyTransactionLogs">
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Table End -->
+                    </div>
+                    <div class="row-cols-md-1"></div>
+                </div>
+
+                <script src="script/commonFunction.js"></script>
+                <script src="script/tableCommonFunctions.js"></script>
+                <script src="script/validation.js"></script>
+                <script src="controllerjs/transactionLogs.js"></script>
+
+            </div>
+        </main>
+    </div>
+</div>
+<script src="script/dashboard.js"></script>
+</body>
+
+
+</html>

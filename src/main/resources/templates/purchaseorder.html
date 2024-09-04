@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragementHead:: headTagFragment}"></head>
+
+<body class="sb-nav-fixed">
+
+<nav th:replace="~{fragementNavBars :: topNavFragment}"></nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{fragementNavBars :: sideNavFragment}"></nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main style="margin-top: 22px">
+            <div class="container-fluid px-4">
+                <div class="tab">
+                    <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="tableTabButton" data-bs-toggle="tab"
+                                    data-bs-target="#table-tab-pane" type="button" role="tab" aria-controls="form-tab-pane"
+                                    aria-selected="true">Purchase Orders</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="formTabButton" data-bs-toggle="tab" data-bs-target="#form-tab-pane"
+                                    type="button" role="tab" aria-controls="table-tab-pane" aria-selected="false">New Order</button>
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="table-tab-pane" role="tabpanel" aria-labelledby="form-tab"
+                         tabindex="0">
+                        <!-- Table Area Start -->
+                        <div class="row mt-2">
+                            <div class="row-cols-md-1"></div>
+                            <div class="row-cols-md-10 table-responsive" style="width: 100%;">
+                                <!-- Table Start -->
+                                <div class="tableDiv">
+                                    <table class="table table-hover moduleMainTable" id="tablePurchaseOrder">
+                                        <thead class="table-active">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Purchase Order No.</th>
+                                            <th>Supplier Name</th>
+                                            <th>Required Date</th>
+                                            <th>Send Date</th>
+                                            <th>Total Amount</th>
+                                            <th>POrder Status</th>
+                                            <th>Modify</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbodyPurchaseOrder">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Table End -->
+                            </div>
+                            <div class="row-cols-md-1"></div>
+                        </div>
+                        <!-- Table Area End -->
+                    </div>
+                    <div class="tab-pane fade" id="form-tab-pane" role="tabpanel" aria-labelledby="table-tab" tabindex="1">
+                        <!-- Form Start -->
+                        <div class="row mt-2">
+                            <div class="cols-md-10">
+                                <form onsubmit="return false" id="formPurchaseOrder" class="moduleMainForm">
+                                    <!-- Auto Generated Purchase Order No, Required lable and Back_Button Start-->
+                                    <div class="row mt-1" style="margin-bottom: 8px;">
+                                        <div class="d-flex justify-content-between">
+                                            <!-- Purchase Order No-->
+                                            <div class="col-2">
+                                                <label for="inputPurchaseOrderNo" class="form-label fw-bold">
+                                                    Purchase Order No. : <span class="text-danger">*</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="text" class="form-control"
+                                                       placeholder="Auto Generated Purchase Order No." id="inputPurchaseOrderNo" disabled>
+                                            </div>
+                                            <!-- Purchase Order No End-->
+                                            <div class="col-5"></div>
+                                            <div class="col-1 fw-bold">
+                                                <span class="required"><span class="text-danger">*</span>Required</span>
+                                            </div>
+                                            <div class="col-1">
+                                                <div id="backButtonDivFormFirst">
+                                                    <button type="button" style="width: 100px;" class="btn text-primary btn-lg"
+                                                            onclick="backButtonPurchaseOrderForm()">
+                                                        <i class="fa-regular fa-rectangle-xmark fa-xl"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- Auto Generated Purchase Order No, Required lable and Back_Button End-->
+
+
+                                    <div id="formEditable">
+                                        <div class="row">
+                                            <!-- Form Start -->
+                                            <div class="col-6">
+                                                <div class="row mt-1 gy-2">
+                                                    <div class="justify-content-between">
+                                                        <!-- Select Supplier -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputSelectSupplier" class="form-label fw-bold">
+                                                                    Supplier Name : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <Select type="select" class="form-control"
+                                                                        id="inputSelectSupplier" autocomplete="off" >
+                                                                </select>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Supplier is not selected..
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Supplier No -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputSupplierNo" class="form-label fw-bold">
+                                                                    Supplier No : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto-Filled Supplier No" id="inputSupplierNo"
+                                                                       autocomplete="off" disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Supplier No is not valid..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Supplier No Ends-->
+
+                                                        <!-- Required Date -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputRequiredDate" class="form-label fw-bold">
+                                                                    Required Date : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="date" class="form-control"
+                                                                       placeholder="Enter Required Date" id="inputRequiredDate"
+                                                                       autocomplete="off" onkeydown="return false;">
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Date must not exceed next month..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Required Date Ends-->
+
+                                                        <!-- Send Date -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputSendDate" class="form-label fw-bold">
+                                                                    Send Date : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="date" class="form-control"
+                                                                       placeholder="Enter Send Date" id="inputSendDate"
+                                                                       autocomplete="off" onkeydown="return false;">
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Send Date is not valid..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Send Date Ends-->
+
+                                                        <!-- Total Amount -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputTotalAmount"
+                                                                       class="form-label fw-bold">
+                                                                    Total Amount : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto Generated Total Amount"
+                                                                       id="inputTotalAmount"
+                                                                       autocomplete="off">
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Total amount is not valid</div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Total Amount Ends-->
+
+                                                        <!-- Purchase Order Status -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputPurchaseOrderStatus"
+                                                                       class="form-label fw-bold">
+                                                                    Purchase Order Status : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <Select type="select" class="form-control"
+                                                                        id="inputPurchaseOrderStatus" autocomplete="off"
+                                                                        onchange="selectDynamicValidator(this,'purchaseorder','purchase_order_status_id')">
+                                                                </select>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Purchase Order Status is not valid..!</div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Purchase Order Status end-->
+
+                                                        <!-- Purchase Order Description -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputPurchaseOrderDescription"
+                                                                       class="form-label fw-bold">
+                                                                    Purchase Order Description : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                        <textarea class="form-control" id="inputPurchaseOrderDescription"
+                                                                  cols="30" rows="2"
+                                                                  onkeyup="textValidator(this,'^([A-Za-z0-9\\s\\.]{2,180})+$','purchaseorder','porder_description')"
+                                                                  placeholder="Enter Description"></textarea>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Please Enter a valid Description..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Purchase Order Description Ends-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Form Order End -->
+
+
+                                            <!-- Form Order Inner-Form and Table Start -->
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <!-- Material Search By Name -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="row">
+                                                                <label for="inputMaterialName" class="form-label fw-bold">
+                                                                    Material Name : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <Select type="select" class="form-control"
+                                                                        id="inputMaterialName" autocomplete="off"
+                                                                        onchange="selectDynamicValidator(this,'purchaseorderhasmaterial','material_id')">
+                                                                </select>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Material is not valid..</div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Material Search By Name Ends-->
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <!-- Material No Auto Filled -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="row">
+                                                                <label for="inputMaterialNo" class="form-label fw-bold">
+                                                                    Material No. : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto-Filled Material No." id="inputMaterialNo"
+                                                                       autocomplete="off" disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Material No is not valid..</div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Material No Auto Filled Ends-->
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <!-- Unit Quantity -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="row">
+                                                                <label for="inputMaterialUnitQuantity"
+                                                                       class="form-label fw-bold">
+                                                                    Quantity : <span class="text-danger">*</span>
+                                                                    (<span id="unitLabelSpan">Unit</span>)
+                                                                </label>
+                                                            </div>
+                                                            <div class="row d-flex">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Enter Quantity" id="inputMaterialUnitQuantity"
+                                                                       disabled autocomplete="off">
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Please Enter a Unit Quantity..!
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- Unit Quantity Ends-->
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <!-- Unit Price -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="row">
+                                                                <label for="inputMaterialUnitPrice" class="form-label fw-bold">
+                                                                    Unit Price : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto-Filled Unit Price"
+                                                                       id="inputMaterialUnitPrice" disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Unit Price is not valid..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Unit Price Ends-->
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <!-- Line Price -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="row">
+                                                                <label for="inputMaterialLinePrice" class="form-label fw-bold">
+                                                                    Line Price : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto-Filled Line Price"
+                                                                       id="inputMaterialLinePrice" disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Line Price is not valid..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Line Price Ends-->
+                                                    </div>
+                                                </div>
+
+                                                <div class="row formField">
+                                                    <div class="row">
+                                                        <div class="col-12" id="porderHasMaterialErrorDiv"
+                                                             style="color: #dc3545; margin-top: 0.25rem; font-size: 0.875em; display:none;">
+                                                            Add Materials Purchase Order..!</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12 text-end">
+                                                            <button type="button" id="buttonClearPOrder"
+                                                                    class="btn btn-outline-dark me-2"
+                                                                    onclick="refreshPOhasMInnerFormAndTable();">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                            <button type="button" id="buttonAddPOrder"
+                                                                    class="btn btn-outline-primary">
+                                                                <i class="fas fa-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div id="tableDivInnerForm">
+                                                    <!-- table start -->
+                                                    <table id="tableInnerForm" class="table table-hover tableInnerForm"
+                                                           style="border-radius: 5px;">
+                                                        <thead class="table-active"
+                                                               style="background-color: rgb(179, 192, 214);">
+                                                        <tr>
+                                                            <th> # </th> <!-- # , No , Index  -->
+                                                            <th> Mat No </th>
+                                                            <th> Material Name </th>
+                                                            <th> Unit Price (Rs.) </th>
+                                                            <th> Quantity </th>
+                                                            <th> Line Price (Rs.) </th>
+                                                            <th> Modify </th>
+                                                        </tr>
+                                                        </thead>
+
+                                                        <tbody id="tbodyInnerFormPOrderMaterial" class="table-body">
+
+                                                        </tbody>
+                                                    </table>
+                                                    <!-- table send -->
+                                                </div>
+
+                                            </div>
+                                            <!-- Form Order Inner-Form and Table Ends -->
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-1">
+                                                <button type="reset" id="formRestBtn"
+                                                        class=" btn fw-bold btn-reset formClearBtn"
+                                                        onclick="ClearPurchaseOrderButtonFunction()">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                            <div class="col-9"></div>
+                                            <div class="col-2" id="normalLayOutFooterBtns" style="display: flex;">
+                                                <div class="col-6">
+                                                    <button type="button" id="formUpdateBtn" style="display: none;"
+                                                            class=" btn fw-bold btn-update formUpdateBtn">
+                                                        Update
+                                                    </button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button type="button" id="formAddBtn" onclick="submitPurchaseOrder()"
+                                                            class="btn btn-primary fw-bold btn-add formAddBtn">
+                                                        Add
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Form End -->
+                    </div>
+
+                </div>
+
+                <table style="display: none;">
+                    <tbody id="tbodyForBill">
+
+                    </tbody>
+                </table>
+
+
+
+                <script src="script/commonFunction.js"></script>
+                <script src="script/tableCommonFunctions.js"></script>
+                <script src="script/validation.js"></script>
+                <script src="controllerjs/purchaseorder.js"></script>
+                <script src="script/billGenerate.js"></script>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="script/dashboard.js"></script>
+</body>
+
+</html>
+
+
+
+

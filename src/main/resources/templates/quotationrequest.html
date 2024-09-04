@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragementHead:: headTagFragment}"></head>
+<head>
+    <!-- Module CSS -->
+    <link rel="stylesheet" href="/css/quotationrequest.css">
+</head>
+
+<body class="sb-nav-fixed">
+
+<nav th:replace="~{fragementNavBars :: topNavFragment}"></nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{fragementNavBars :: sideNavFragment}"></nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main style="margin-top: 22px">
+            <div class="container-fluid px-4">
+                <div class="tab">
+                    <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="tableTabButton" data-bs-toggle="tab"
+                                    data-bs-target="#form-tab-pane" type="button" role="tab" aria-controls="form-tab-pane"
+                                    aria-selected="true">Requested List</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="formTabButton" data-bs-toggle="tab" data-bs-target="#table-tab-pane"
+                                    type="button" role="tab" aria-controls="table-tab-pane" aria-selected="false">New Quotation</button>
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="form-tab-pane" role="tabpanel" aria-labelledby="form-tab"
+                         tabindex="0">
+                        <!-- Table Area Start -->
+                        <div class="row mt-2">
+                            <div class="row-cols-md-1"></div>
+                            <div class="row-cols-md-10 table-responsive" style="width: 100%;">
+                                <!-- Table Start -->
+                                <div class="tableDiv">
+                                    <table class="table table-hover" id="tableQuotationRequest">
+                                        <thead class="table-active">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Quotation Request No.</th>
+                                            <th>Quotation Request Status</th>
+                                            <th>Supplier Name</th>
+                                            <th>Supplier Status</th>
+                                            <th>Required Date</th>
+                                            <th>Modify</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbodyQuotationRequest">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Table End -->
+                            </div>
+                            <div class="row-cols-md-1"></div>
+                        </div>
+                        <!-- Table Area End -->
+                    </div>
+                    <div class="tab-pane fade" id="table-tab-pane" role="tabpanel" aria-labelledby="table-tab" tabindex="1">
+                        <!-- Form Start -->
+                        <div class="row mt-2">
+                            <div class="cols-md-10">
+                                <form onsubmit="return false" id="formQuotationRequest">
+
+                                    <div class="row mt-1" style="margin-bottom: 8px;">
+                                        <div class="d-flex">
+                                            <div class="div col-6">
+                                                <!-- Req Quotation No -->
+                                                <div class="row d-flex">
+                                                    <div class="col-4">
+                                                        <label for="inputQRNo" class="form-label fw-bold">
+                                                            Quot Request No. : <span class="text-danger">*</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Auto Generated Quotation Request No." id="inputQRNo"
+                                                               disabled>
+                                                    </div>
+                                                </div>
+                                                <!-- Req Quotation No End-->
+                                            </div>
+                                            <div class="col-4"></div>
+                                            <!-- Required Label-->
+                                            <div class="col-1 fw-bold">
+                                                <span class="required"><span class="text-danger">*</span>Required</span>
+                                            </div>
+                                            <!-- Back Button section-->
+                                            <div class="col-1" id="backButtonDivFormFirst">
+                                                <button type="button" style="width: 100px;" class="btn text-primary btn-lg"
+                                                        onclick="backButtonQuotationRequestForm()">
+                                                    <i class="fa-regular fa-rectangle-xmark fa-xl"></i>
+                                                </button>
+                                            </div>
+                                            <!-- Back Button Section End-->
+                                        </div>
+                                    </div>
+
+                                    <div id="formEditable">
+                                        <div class="row">
+                                            <div class="col-6">
+
+                                                <div class="row mt-1 gy-2">
+                                                    <div class="justify-content-between">
+                                                        <!-- Supplier Name -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputSupplierName" class="form-label fw-bold">
+                                                                    Supplier Name : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Search By Supplier Name" id="inputSupplierName"
+                                                                       autocomplete="off">
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Supplier Name is not valid..
+                                                                </div>
+                                                                <div id="divResultBySupplierName" class="divSearchResult"
+                                                                     style="max-width: 330px;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Supplier Name Ends-->
+
+                                                        <!-- Supplier No -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputSupplierNo" class="form-label fw-bold">
+                                                                    Supplier No : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="Auto-Filled Supplier No" id="inputSupplierNo"
+                                                                       autocomplete="off" disabled>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Supplier No is not valid..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Supplier No Ends-->
+                                                        <!-- Required Date -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputRequiredDate" class="form-label fw-bold">
+                                                                    Required Date : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <input type="date" class="form-control"
+                                                                       placeholder="Enter Required Date" id="inputRequiredDate"
+                                                                       autocomplete="off" onkeydown="return false;">
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Date must not exceed next month..!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Required Date Ends-->
+                                                        <!-- Quotation Status -->
+                                                        <div class="row formField justify-content-start">
+                                                            <div class="col-4">
+                                                                <label for="inputQuotationRequestStatus" class="form-label fw-bold">
+                                                                    Quotation Request Status : <span class="text-danger">*</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <Select type="select" class="form-control"
+                                                                        id="inputQuotationRequestStatus" required autocomplete="off"
+                                                                        onchange="selectDynamicValidator(this,'quotationrequest','quotation_request_status_id')">
+                                                                </select>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback">Looks like this Quotation Request Status in incorrect..!</div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Quotation Status end-->
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div id="tableDivInnerForm">
+                                                    <label class="form-label fw-bold">
+                                                        Supplier Material List : <span class="text-danger">*</span>
+                                                    </label>
+                                                    <!-- table start -->
+                                                    <table id="tableInnerFormMaterial" class="table tableInnerForm" style="border-radius: 5px;">
+                                                        <thead class="table-active"
+                                                               style="background-color: rgb(179, 192, 214);">
+                                                        <tr>
+                                                            <th> # </th> <!-- # , No , Index  -->
+                                                            <th> Material No </th>
+                                                            <th> Material Name </th>
+                                                            <th> Quantity </th>
+                                                        </tr>
+                                                        <tbody id="tbodyInnerFormMaterial" class="table-body">
+
+                                                        </tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                    <!-- table send -->
+                                                    <p><span style="font-weight: bold;">**Note : </span>This material quantity is the re-order quantity( average material requirement for a specific time period ) for that specific material.. This can be changed in the purchase order..</p>
+                                                </div>
+                                                <hr>
+                                                <br>
+                                            </div>
+                                            <!-- Form Order Inner-Form and Table Ends -->
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-1">
+                                                <button type="reset" id="formRestBtn"
+                                                        class=" btn fw-bold btn-reset formClearBtn"
+                                                        onclick="ClearQuotationReqFormButtonFunction()">
+                                                    Clear
+                                                </button>
+                                            </div>
+                                            <div class="col-9"></div>
+                                            <div class="col-2" id="normalLayOutFooterBtns" style="display: flex;">
+                                                <div class="col-6">
+                                                    <button type="button" id="formUpdateBtn" style="display: none;"
+                                                            class=" btn fw-bold btn-update formUpdateBtn">
+                                                        Update
+                                                    </button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button type="button" id="formAddBtn" onclick="submitQuotationRequest()"
+                                                            class="btn btn-primary fw-bold btn-add formAddBtn">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Form End -->
+                    </div>
+
+                </div>
+
+                <!-- Inner Form Modals -->
+
+                <table style="display: none;">
+                    <tbody id="tbodyForQuotation">
+
+                    </tbody>
+                </table>
+
+
+
+                <script src="script/commonFunction.js"></script>
+                <script src="script/tableCommonFunctions.js"></script>
+                <script src="script/validation.js"></script>
+                <script src="script/billGenerate.js"></script>
+                <script src="controllerjs/quotationrequest.js"></script>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="script/dashboard.js"></script>
+</body>
+
+</html>

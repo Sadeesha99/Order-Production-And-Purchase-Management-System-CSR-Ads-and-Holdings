@@ -1,0 +1,138 @@
+* {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #dbd4cb;
+  background: linear-gradient(90deg, rgba(7, 13, 29, 0.937) , rgba(6, 14, 34, 0.863));
+}
+
+h1 {
+  margin: 40px 0 20px;
+}
+
+.lock {
+  border-radius: 5px;
+  width: 55px;
+  height: 45px;
+  background-color: #dbd4cb;
+  animation: dip 1s;
+  animation-delay: 1.5s;
+}
+.lock::before, .lock::after {
+  content: "";
+  position: absolute;
+  border-left: 5px solid #dbd4cb;
+  height: 20px;
+  width: 15px;
+  left: calc(50% - 12.5px);
+}
+.lock::before {
+  top: -30px;
+  border: 5px solid #dbd4cb;
+  border-bottom-color: transparent;
+  border-radius: 15px 15px 0 0;
+  height: 30px;
+  animation: lock 2s, spin 2s;
+}
+.lock::after {
+  top: -10px;
+  border-right: 5px solid transparent;
+  animation: spin 2s;
+}
+
+.container { 
+  height: 50px;
+  position: relative;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.containerLogOut { 
+  height: 50px;
+  position: relative;
+}
+
+.centerLogOut {
+  margin-top:10%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#backToDashBtn{
+  background-color: #dbd4cb;
+  color: #070d1def ;
+  font-size: medium;
+  font-weight: 600;
+  font-family: sans-serif;
+  border: 0px;
+  padding: 3px;
+  margin-top: 20px;
+  border-radius: 4px;
+  width: 200px;
+  height: 35px;
+  
+}
+#logoutBtn{
+  background-color: #dbd4cb;
+  color: #070d1def ;
+  font-size: small;
+  font-weight: 600;
+  font-family: sans-serif;
+  border: 0px;
+  padding: 3px;
+  border-radius: 4px;
+  width: 85px;
+  height: 25px;
+}
+
+
+@keyframes lock {
+  0% {
+    top: -45px;
+  }
+  65% {
+    top: -45px;
+  }
+  100% {
+    top: -30px;
+  }
+}
+@keyframes spin {
+  0% {
+    transform: scaleX(-1);
+    left: calc(50% - 30px);
+  }
+  65% {
+    transform: scaleX(1);
+    left: calc(50% - 12.5px);
+  }
+}
+@keyframes dip {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

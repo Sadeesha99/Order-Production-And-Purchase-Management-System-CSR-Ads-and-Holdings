@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragementHead:: headTagFragment}"></head>
+<head>
+    <!-- Module CSS -->
+    <link rel="stylesheet" href="/css/material.css">
+</head>
+
+<body class="sb-nav-fixed">
+
+<nav th:replace="~{fragementNavBars :: topNavFragment}"></nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{fragementNavBars :: sideNavFragment}"></nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main style="margin-top: 22px">
+            <div class="container-fluid px-4">
+
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-4">
+                        <div class="card" style="margin-left: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title">Daily Profit/Loss Report</h5>
+                                <p class="card-text">This is a report generator, which reports on daily income, expenses and profit or loss of that day.
+                                    Can generate reports up to past 6 months.</p>
+
+                                <a href="/dailyprofitexpenseincome" class="btn btn-primary">Go To Report <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card" style="margin-left: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title">Monthly Profit/Loss Report</h5>
+                                <p class="card-text">This is a report generator, which reports on monthly income, expenses and profit or loss.
+                                    Can generate reports up to past 24 months.</p>
+                                <a href="/monthlyprofitexpenseincome" class="btn btn-primary">Go To Report <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card" style="margin-left: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title">Best Material Supplier Price Report</h5>
+                                <p class="card-text">This is a tool developed to analyze best price for a material based on different supplier quotations company has received.</p>
+                                <a href="/materialsupplierprice" class="btn btn-primary">Go To Report <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-4">
+                        <div class="card" style="margin-left: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title">Monthly Material Usage Report</h5>
+                                <p class="card-text">This is a report generator, which reports on how material monthly usage for given time period.
+                                    Can generate reports up to past 24 months.</p>
+
+                                <a href="/monthlymaterialusage" class="btn btn-primary">Go To Report <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card" style="margin-left: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title">Daily Material Usage Report</h5>
+                                <p class="card-text">This is a report generator, which reports on how different materials daily usage for given time period.
+                                    Can generate reports up to past 6 months.</p>
+
+                                <a href="/dailymaterialusage" class="btn btn-primary">Go To Report <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card" style="margin-left: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title">Material Usage Report For ROP</h5>
+                                <p class="card-text">This is a Re-Order Point Analyzer Tool, which report specific material usage for given time period.
+                                    Can use to set Re-Order Point.</p>
+
+                                <a href="/ropmaterialusage" class="btn btn-primary">Go To Report <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-4">
+                        <div class="card" style="margin-left: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title">Production Logs Report</h5>
+                                <p class="card-text">This table is to display all activities related to productions of the organization. Click following button to open.</p>
+                                <a href="/reportproductionlogs" class="btn btn-primary">Go To Report <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card" style="margin-left: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title">Material Inventory Logs Report</h5>
+                                <p class="card-text">This table is to display all activities related to material inventory of the organization. Click following button to open.</p>
+                                <a href="/reportinventorylogs" class="btn btn-primary">Go To Report <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card" style="margin-left: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title">Transactional Logs Report</h5>
+                                <p class="card-text">This table is to display all activities related to monetary transactions of the organization. Click following button to open.</p>
+                                <a href="/transactionlog" class="btn btn-primary">Go To Report <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </main>
+    </div>
+</div>
+<script src="script/dashboard.js"></script>
+</body>
+
+
+</html>
